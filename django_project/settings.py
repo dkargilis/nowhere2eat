@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+&
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 #DEBUG_PROPAGATE_EXCEPTIONS = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'shrouded-mesa-49267.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'shrouded-mesa-49267.herokuapp.com', 'nowhere2eat.com', 'www.nowhere2eat.com']
 
 
 # Application definition
