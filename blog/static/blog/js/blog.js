@@ -465,8 +465,8 @@ function addSingleRestaurant(restaurantToAdd){
 
 function activateButton(){
     //reroute to /phl/ then create group
-    if(this.innerText == "Philadelphia"){
-        generateNewGroup("PH")
+    if(this.innerText == "University City"){
+        generateNewGroup("UC")
     }
     if(this.innerText == "East Lansing"){
         generateNewGroup("EL")

@@ -40,6 +40,10 @@ contextPH = {
         'posts': Restaurant.objects.filter(region='PH')
     }
 
+contextUC = {
+        'posts': Restaurant.objects.filter(region='UC')
+    }
+
 #contextPH = {
 #        'posts': Restaurant.objects.order_by('title')
 #}
@@ -52,7 +56,7 @@ context2 = {
 }
 
 context3 = {
-    "PHL":"Philadelphia",
+    "UC":"University City",
     "EL":"East Lansing"
 }
 
@@ -310,7 +314,7 @@ def newGroup(request):
         unique_id = get_random_string(length=16)
 
         #create database entry with that id as title
-        listFresh = list(Restaurant.objects.filter(region="PH").values())
+        listFresh = list(Restaurant.objects.filter(region="UC").values())
         dictFresh = {}
 
         c = 0
@@ -340,6 +344,18 @@ def groupPH(request):
         return HttpResponse(json.dumps({'restaurantInfo':instance.restaurantInfo, 'filterInfo':instance.filterInfo, 'serverFilterUsernamesUp': instance.filterUsernamesVotedUp, 'serverFilterUsernamesDown':instance.filterUsernamesVotedDown}), content_type='application/json')
 
     return render(request, 'blog/home.html', contextPH)
+
+def groupUC(request):
+    if request.is_ajax():
+        print("here is the title:")
+        print(request.GET.get('title', ''))
+        title = request.GET.get('title', '')
+        instance = filters.objects.get(title=title)
+
+        #queryset = Restaurant.objects.filter(region="PH").values()
+        return HttpResponse(json.dumps({'restaurantInfo':instance.restaurantInfo, 'filterInfo':instance.filterInfo, 'serverFilterUsernamesUp': instance.filterUsernamesVotedUp, 'serverFilterUsernamesDown':instance.filterUsernamesVotedDown}), content_type='application/json')
+
+    return render(request, 'blog/home.html', contextUC)
 
 def groupEL(request):
     if request.is_ajax():
