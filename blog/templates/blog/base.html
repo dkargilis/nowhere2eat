@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static '/blog/css/main.css' %}?{% now "U" %}">
+
+    <!-- animate.css Animation project-->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+
+    {% if title %}
+        <title>Nowhere2Eat - {{ title }}</title>
+    {% else %}
+        <title>Nowhere2Eat</title>
+    {% endif %}
+
+
+</head>
+
+
+
+<body>
+
+
+
+
+
+
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">Nowhere2Eat</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <!--<a class="nav-item nav-link" id="groupsButton">New Group</a>-->
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              <a class="nav-item nav-link" href="#">Contact</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+
+
+    {% block content %}{% endblock %}
+
+
+
+
+      </div>
+    </main>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"
+            integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+            crossorigin="anonymous"></script>
+    <script src="{% static '/blog/js/blog.js' %}?{% now "U" %}"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

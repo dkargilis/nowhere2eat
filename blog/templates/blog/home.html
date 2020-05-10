@@ -1,0 +1,335 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+  <div data-title = "group" id = "page"> </div>
+
+
+
+
+  <div id="RestaurantOptions" >
+    <div class="container">
+
+      <div class="animated usernameEntry" id="usernameContainer" hidden>
+          <h9>Please enter a username:</h9> <br><input type="text" name="username" id="usernameField" placeholder="Username">
+          <button1 id=usernameSubmitButton> Submit </button1>
+      </div>
+
+
+        <ul class="restaurants">
+
+          {% for post in posts %}
+            <li>
+
+              <div class="animated restElements" id={{ post.id }} hidden>
+                <article class="media content-section">
+
+                      <div class="media-body">
+                        <div class="article-metadata">
+                          <small class="text-muted">{{ post.crossroads }}</small>
+                        </div>
+
+                        <h2><a class="article-title dynamicLink" href=# target="_blank">{{ post.title }}</a>
+                        </h2>
+                      </div>
+
+
+
+                      <div>
+
+                        <div class="upvoteButton" id="upvoteRestaurantButton">
+                            <img class='likeButtonRestaurants' src="{% static '/blog/media/like2grey.png' %}"/>
+                        </div>
+
+                        <div class="downvoteButton" id="downvoteRestaurantButton">
+                          <img class='dislikeButtonRestaurants' src="{% static '/blog/media/dislike2grey.png' %}"/>
+                        </div>
+                        <div class="score">{{post.score}}</div>
+                      </div>
+
+
+
+                </article>
+              </div>
+
+            </li>
+          {% endfor %}
+
+        </ul>
+
+
+
+
+
+      </div>
+  </div>
+</div>
+
+
+<div class="col-md-4">
+          <div class="animated restElements" hidden>
+            <div class="content-section">
+
+
+
+              <h3>Cuisine</h3>
+              <p class='text-muted'> <!--put a label for features here-->
+
+                  <div id=FilterOptions>
+                    <ul class="list-group">
+
+                      <div class="filterElements">
+                        <li class="list-group-item" id=American style="display: flex; justify-content: flex-end">
+                            <div class="justify-start">American</div>
+                            <p1 class="scoreFilter">0</p1>
+                          <div class="downvoteFilterButton">
+                            <img class='dislikeButtonFilters' src="{% static '/blog/media/dislike2grey.png' %}"/>
+                          </div>
+                          <div class="upvoteFilterButton">
+                            <img class='likeButtonFilters' src="{% static '/blog/media/like2grey.png' %}"/>
+                          </div>
+                        </li>
+                      </div>
+
+                      <div class="filterElements">
+                        <li class="list-group-item" id=Chinese style="display: flex; justify-content: flex-end">
+                          <div class="justify-start">Chinese</div>
+                          <p1 class="scoreFilter">0</p1>
+
+
+                          <div class="downvoteFilterButton" justify-self>
+                            <img class='dislikeButtonFilters' src="{% static '/blog/media/dislike2grey.png' %}"/>
+                          </div>
+                          <div class="upvoteFilterButton">
+                            <img class='likeButtonFilters' src="{% static '/blog/media/like2grey.png' %}"/>
+                          </div>
+                        </li>
+                      </div>
+                      <div class="filterElements">
+                        <li class="list-group-item" id=Desserts style="display: flex; justify-content: space-around">
+                          <div class="justify-start">Desserts</div>
+                          <p1 class="scoreFilter">0</p1>
+
+                          <div class="downvoteFilterButton">
+                            <img class='dislikeButtonFilters' src="{% static '/blog/media/dislike2grey.png' %}"/>
+                          </div>
+                          <div class="upvoteFilterButton">
+                            <img class='likeButtonFilters' src="{% static '/blog/media/like2grey.png' %}"/>
+                          </div>
+                        </li>
+                      </div>
+
+                      <div class="filterElements">
+                        <li class="list-group-item" id=Halal style="display: flex; justify-content: space-around">
+                          <div class="justify-start">Halal</div>
+                          <p1 class="scoreFilter">0</p1>
+
+                          <div class="downvoteFilterButton">
+                            <img class='dislikeButtonFilters' src="{% static '/blog/media/dislike2grey.png' %}"/>
+                          </div>
+                          <div class="upvoteFilterButton">
+                            <img class='likeButtonFilters' src="{% static '/blog/media/like2grey.png' %}"/>
+                          </div>
+                        </li>
+                      </div>
+
+                      <div class="filterElements">
+                        <li class="list-group-item" id=Indian style="display: flex; justify-content: space-around">
+                          <div class="justify-start">Indian</div>
+                          <p1 class="scoreFilter">0</p1>
+
+                          <div class="downvoteFilterButton">
+                            <img class='dislikeButtonFilters' src="{% static '/blog/media/dislike2grey.png' %}"/>
+                          </div>
+                          <div class="upvoteFilterButton">
+                            <img class='likeButtonFilters' src="{% static '/blog/media/like2grey.png' %}"/>
+                          </div>
+                        </li>
+                      </div>
+
+                      <div class="filterElements">
+                        <li class="list-group-item" id=Italian style="display: flex; justify-content: space-around">
+                          <div class="justify-start">Italian</div>
+                          <p1 class="scoreFilter">0</p1>
+
+                          <div class="downvoteFilterButton">
+                            <img class='dislikeButtonFilters' src="{% static '/blog/media/dislike2grey.png' %}"/>
+                          </div>
+                          <div class="upvoteFilterButton">
+                            <img class='likeButtonFilters' src="{% static '/blog/media/like2grey.png' %}"/>
+                          </div>
+                        </li>
+                      </div>
+
+                      <div class="filterElements">
+                        <li class="list-group-item" id=Japanese style="display: flex; justify-content: space-around">
+                          <div class="justify-start">Japanese</div>
+                          <p1 class="scoreFilter">0</p1>
+
+                          <div class="downvoteFilterButton">
+                            <img class='dislikeButtonFilters' src="{% static '/blog/media/dislike2grey.png' %}"/>
+                          </div>
+                          <div class="upvoteFilterButton">
+                            <img class='likeButtonFilters' src="{% static '/blog/media/like2grey.png' %}"/>
+                          </div>
+                        </li>
+                      </div>
+
+                      <div class="filterElements">
+                        <li class="list-group-item" id=Mexican style="display: flex; justify-content: space-around">
+                          <div class="justify-start">Mexican</div>
+                          <p1 class="scoreFilter">0</p1>
+
+                          <div class="downvoteFilterButton">
+                            <img class='dislikeButtonFilters' src="{% static '/blog/media/dislike2grey.png' %}"/>
+                          </div>
+                          <div class="upvoteFilterButton">
+                            <img class='likeButtonFilters' src="{% static '/blog/media/like2grey.png' %}"/>
+                          </div>
+                        </li>
+                      </div>
+
+                      <div class="filterElements">
+                        <li class="list-group-item" id = Thai style="display: flex; justify-content: space-around">
+                          <div class="justify-start">Thai</div>
+                          <p1 class="scoreFilter">0</p1>
+
+                          <div class="downvoteFilterButton">
+                            <img class='dislikeButtonFilters' src="{% static '/blog/media/dislike2grey.png' %}"/>
+                          </div>
+                          <div class="upvoteFilterButton">
+                            <img class='likeButtonFilters' src="{% static '/blog/media/like2grey.png' %}"/>
+                          </div>
+                        </li>
+                      </div>
+
+                    </ul>
+
+
+
+                    <h3>Venue</h3>
+                    <ul class="list-group">
+
+                      <div class="filterElements">
+                        <li class="list-group-item" id=Sit-Down style="display: flex; justify-content: space-around">
+                          <div class="justify-start">Sit-Down</div>
+                          <p1 class="scoreFilter">0</p1>
+
+                          <div class="downvoteFilterButton">
+                            <img class='dislikeButtonFilters' src="{% static '/blog/media/dislike2grey.png' %}"/>
+                          </div>
+                          <div class="upvoteFilterButton">
+                            <img class='likeButtonFilters' src="{% static '/blog/media/like2grey.png' %}"/>
+                          </div>
+                        </li>
+                      </div>
+
+                      <div class="filterElements">
+                        <li class="list-group-item" id=Outdoor style="display: flex; justify-content: space-around">
+                          <div class="justify-start">Outdoor</div>
+                          <p1 class="scoreFilter">0</p1>
+
+                          <div class="downvoteFilterButton">
+                            <img class='dislikeButtonFilters' src="{% static '/blog/media/dislike2grey.png' %}"/>
+                          </div>
+                          <div class="upvoteFilterButton">
+                            <img class='likeButtonFilters' src="{% static '/blog/media/like2grey.png' %}"/>
+                          </div>
+                        </li>
+                      </div>
+
+                      <div class="filterElements">
+                        <li class="list-group-item" id=Vegetarian style="display: flex; justify-content: space-around">
+                          <div class="justify-start">Vegetarian</div>
+                          <p1 class="scoreFilter">0</p1>
+
+                          <div class="downvoteFilterButton">
+                            <img class='dislikeButtonFilters' src="{% static '/blog/media/dislike2grey.png' %}"/>
+                          </div>
+                          <div class="upvoteFilterButton">
+                            <img class='likeButtonFilters' src="{% static '/blog/media/like2grey.png' %}"/>
+                          </div>
+                        </li>
+                      </div>
+
+                      <div class="filterElements">
+                        <li class="list-group-item" id=$$$$ style="display: flex; justify-content: space-around">
+                          <div class="justify-start">$$$$</div>
+                          <p1 class="scoreFilter">0</p1>
+
+                          <div class="downvoteFilterButton">
+                            <img class='dislikeButtonFilters' src="{% static '/blog/media/dislike2grey.png' %}"/>
+                          </div>
+                          <div class="upvoteFilterButton">
+                            <img class='likeButtonFilters' src="{% static '/blog/media/like2grey.png' %}"/>
+                          </div>
+                        </li>
+                      </div>
+
+                      <div class="filterElements">
+                        <li class="list-group-item" id=$$$ style="display: flex; justify-content: space-around">
+                          <div class="justify-start">$$$</div>
+                          <p1 class="scoreFilter">0</p1>
+
+                          <div class="downvoteFilterButton">
+                            <img class='dislikeButtonFilters' src="{% static '/blog/media/dislike2grey.png' %}"/>
+                          </div>
+                          <div class="upvoteFilterButton">
+                            <img class='likeButtonFilters' src="{% static '/blog/media/like2grey.png' %}"/>
+                          </div>
+                        </li>
+                      </div>
+
+                      <div class="filterElements">
+                        <li class="list-group-item" id=$$ style="display: flex; justify-content: space-around">
+                          <div class="justify-start">$$</div>
+                          <p1 class="scoreFilter">0</p1>
+
+                          <div class="downvoteFilterButton">
+                            <img class='dislikeButtonFilters' src="{% static '/blog/media/dislike2grey.png' %}"/>
+                          </div>
+                          <div class="upvoteFilterButton">
+                            <img class='likeButtonFilters' src="{% static '/blog/media/like2grey.png' %}"/>
+                          </div>
+                        </li>
+                      </div>
+
+                      <div class="filterElements">
+                        <li class="list-group-item" id=$ style="display: flex; justify-content: space-around">
+                          <div class="justify-start">$</div>
+                          <p1 class="scoreFilter">0</p1>
+
+                          <div class="downvoteFilterButton">
+                            <img class='dislikeButtonFilters' src="{% static '/blog/media/dislike2grey.png' %}"/>
+                          </div>
+                          <div class="upvoteFilterButton">
+                            <img class='likeButtonFilters' src="{% static '/blog/media/like2grey.png' %}"/>
+                          </div>
+                        </li>
+                      </div>
+
+                    </ul>
+
+
+                  </ul>
+
+              </p>
+
+
+
+
+            </div>
+          </div>
+        </div>
+
+
+
+<script>
+    var like2green = "{% static "blog/media/like2green.png" %}"
+    var like2grey = "{% static "blog/media/like2grey.png" %}"
+
+    var dislike2red = "{% static "blog/media/dislike2red.png" %}"
+    var dislike2grey = "{% static "blog/media/dislike2grey.png" %}"
+</script>
+        {% endblock content %}
+
+
