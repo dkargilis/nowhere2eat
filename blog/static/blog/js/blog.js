@@ -43,6 +43,9 @@ var usernameCreated = false;
 var links = document.getElementsByClassName('dynamicLink');
 var href = "http://www.google.com"; //any other link as wish
 
+"scripts": {
+   "start": "node index.js"
+}
 
 //ajax request to figure out what page is and get restaurant data
 if(document.URL.includes("group")){
