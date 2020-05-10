@@ -841,7 +841,7 @@ function generateNewGroup(region){
     $.get('/newGroup.php', {}, function(json_response){
             urlCode = json_response.urlString.url
             titleInDatabase=urlCode
-            window.location.href = document.URL + "/group/"+region+"/?t="+urlCode;
+            window.location.href = document.URL + "group/"+region+"/?t="+urlCode;
     });
 
 
