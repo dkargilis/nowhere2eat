@@ -102,7 +102,7 @@ function loadJS(){
 
     usernameContainer[0]
 
-    titleInDatabase = document.URL.slice(34);
+    titleInDatabase = document.URL.slice(document.URL.indexOf("t=")+2);
     numberOfRestaurants = Object.keys(restaurantInfoMaster).length
 
 
