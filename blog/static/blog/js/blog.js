@@ -840,7 +840,7 @@ function generateNewGroup(region){
     $.get('/newGroup.php', {}, function(json_response){
             urlCode = json_response.urlString.url
             titleInDatabase=urlCode
-            window.location.href = "http://localhost:8000/group/"+region+"/?t="+urlCode;
+            window.location.href = "https://shrouded-mesa-49267.herokuapp.com/group/"+region+"/?t="+urlCode;
     });
 
 
