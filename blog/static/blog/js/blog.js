@@ -46,7 +46,8 @@ var href = "http://www.google.com"; //any other link as wish
 
 //ajax request to figure out what page is and get restaurant data
 if(document.URL.includes("group")){
-        titleInDatabase = document.URL.slice(54);
+        //54
+        titleInDatabase = document.URL.slice(document.URL.indexOf("t=")+2);
 }
 $.ajax({
             url : document.URL,
