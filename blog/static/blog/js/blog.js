@@ -292,7 +292,7 @@ function clickFilterUpvoteButton(){
                     }else{
                         //they havent voted up already
                         //they havent voted down already
-                        //and they have a username so now they can finally vote down!
+                        //and they have a username so now they can finally vote up!
                         console.log("upvoting restauraint")
                         upvoteSingleFilterWithParameter(filters[e].id)
                         updateServer()
