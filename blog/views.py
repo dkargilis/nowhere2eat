@@ -106,17 +106,25 @@ defaultUsernamesVoted = {
 def alphaUpdateServer(request):
     if request.is_ajax():
 
+        print("DECLARING VARIABLES")
 
-        filtersClient = json.loads(request.GET.get('clientFilters'))
-        clientFilterUsernamesUp = json.loads(request.GET.get('clientFilterUsernamesUp'))
-        clientFilterUsernamesDown = json.loads(request.GET.get('clientFilterUsernamesDown'))
-        restaurantDict = json.loads(request.GET.get('values'))
-        title = json.loads(request.GET.get('title'))
+        filtersClient = json.loads(request.POST['clientFilters'])
+        clientFilterUsernamesUp = json.loads(request.POST['clientFilterUsernamesUp'])
+        clientFilterUsernamesDown = json.loads(request.POST['clientFilterUsernamesDown'])
+        restaurantDict = json.loads(request.POST['values'])
+        title = json.loads(request.POST['title'])
+
+
+        #filtersClient = json.loads(request.GET.get('clientFilters'))
+        #clientFilterUsernamesUp = json.loads(request.GET.get('clientFilterUsernamesUp'))
+        #clientFilterUsernamesDown = json.loads(request.GET.get('clientFilterUsernamesDown'))
+        #restaurantDict = json.loads(request.GET.get('values'))
+        #title = json.loads(request.GET.get('title'))
         instance = filters.objects.get(title=title)
         #Now we have the array with the proper information
         #We need to update the server's scores by encoding to a json and updating the database
 
-
+        print("VARIABLES DECLARED")
 
         #Change the filters info in db
         instance.filterInfo = json.dumps(filtersClient)
@@ -176,7 +184,8 @@ def sortAlpha(request):
     if request.is_ajax():
 
         #we need to return the restaurant list basically
-        title = json.loads(request.GET.get('title'))
+        #title = json.loads(request.GET.get('title'))
+        title = json.loads(request.POST['title'])
         instance = filters.objects.get(title=title)
         restaurantDict = json.loads(instance.restaurantInfo)
         #print(restaurantDict)
@@ -188,7 +197,7 @@ def sortAlpha(request):
             values = restaurantDict
 
             counter=0
-            print("sorting alpha")
+
             for item in values:
 
                 #print({0:values[0]})
@@ -367,11 +376,15 @@ def groupEL(request):
 
 def alphaUpdateServerFilters(request):
     print("UPDATING SERVER FILTERS")
+    #title = json.loads(request.POST['title'])
     title=request.GET.get('title')
-    print(title)
+    #print(title)
     instance = filters.objects.get(title=title)
+    #newFilterInfo = json.loads(request.POST['filterData'])
     newFilterInfo = request.GET.get('filterData', '')
-    print(json.loads(newFilterInfo))
+    #print("NEW FILTER INFO")
+    #print(newFilterInfo)
+    #print(json.loads(newFilterInfo))
     #instance.filterInfo = #new filter info dumped as json
 
     instance.filterInfo = newFilterInfo;

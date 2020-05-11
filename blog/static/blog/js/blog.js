@@ -523,10 +523,11 @@ function checkForUpdate(){
     //every second we want it to check for the file and see if it's changed?
 
     console.log("checking for update")
+    console.log(titleInDatabase)
 
     $.ajax({
             url : "/alphaSort.php",
-            type : "GET",
+            type : "POST",
             data : {'title' : JSON.stringify(titleInDatabase)} ,
             success : function (json) {
 
@@ -553,7 +554,7 @@ function updateServer(){
 
      $.ajax({
             url : "/alphaUpdateServer.php",
-            type : "GET",
+            type : "POST",
             data : { 'values' : JSON.stringify(restaurantInfoMaster), 'title' : JSON.stringify(titleInDatabase), 'clientFilters': JSON.stringify(serverFilterScores), 'clientFilterUsernamesUp': JSON.stringify(serverFilterUsernamesUp), 'clientFilterUsernamesDown':JSON.stringify(serverFilterUsernamesDown)} ,
             success : function (json) {
                console.log(json)
