@@ -506,7 +506,7 @@ function updateServer(){
     console.log(titleInDatabase)
 
      $.ajax({
-            url : "/blog/alphaUpdateServer.php",
+            url : "/alphaUpdateServer.php",
             type : "GET",
             data : { 'values' : JSON.stringify(restaurantInfoMaster), 'title' : JSON.stringify(titleInDatabase), 'clientFilters': JSON.stringify(serverFilterScores), 'clientFilterUsernamesUp': JSON.stringify(serverFilterUsernamesUp), 'clientFilterUsernamesDown':JSON.stringify(serverFilterUsernamesDown)} ,
             success : function (json) {
