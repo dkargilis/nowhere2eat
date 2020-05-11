@@ -310,6 +310,7 @@ def newGroup(request):
 
     if request.is_ajax():
 
+        print(" NEW AJAX REQUEST FOR GROUP")
         #gen random id
         unique_id = get_random_string(length=16)
 

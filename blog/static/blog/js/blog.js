@@ -44,6 +44,35 @@ var links = document.getElementsByClassName('dynamicLink');
 var href = "http://www.google.com"; //any other link as wish
 
 
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
 //ajax request to figure out what page is and get restaurant data
 if(document.URL.includes("group")){
         //54
@@ -477,7 +506,7 @@ function activateButton(){
 function checkForUpdate(){
     //every second we want it to check for the file and see if it's changed?
 
-
+    console.log("checking for update")
 
     $.ajax({
             url : "/alphaSort.php",
@@ -494,6 +523,7 @@ function checkForUpdate(){
                serverFilterUsernamesUp = JSON.parse(json['serverFilterUsernamesUp'])
 
                updateOrder()
+               console.log("success")
             },
             error : function () {
                 console.log("Error Ajax checking update");
@@ -838,7 +868,7 @@ function generateNewGroup(region){
     //make ajax request that returns the title and url, set our title to titleindatabase
     //redirect to the generated url
 
-    $.get('/newGroup.php', {}, function(json_response){
+    $.post('/newGroup.php', {}, function(json_response){
             urlCode = json_response.urlString.url
             titleInDatabase=urlCode
             window.location.href = document.URL + "group/"+region+"/?t="+urlCode;
