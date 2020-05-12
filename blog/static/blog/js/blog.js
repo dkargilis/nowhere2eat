@@ -909,7 +909,7 @@ function generateNewGroup(region){
     $.post('/newGroup.php', {}, function(json_response){
             urlCode = json_response.urlString.url
             titleInDatabase=urlCode
-            csrfmiddlewaretoken: '{{ csrf_token }}'
+            //csrf_token: '{{ csrf_token }}'
             window.location.href = document.URL + "group/"+region+"/?t="+urlCode;
     });
 
