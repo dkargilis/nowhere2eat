@@ -6,6 +6,7 @@ from django.conf.urls import url
 
 urlpatterns = [
     path('', views.home, name='blog-home'),
+    path('contact/', views.contact, name='contact'),
     path('about/', views.about, name='blog-about'),
     path('checkFilters.php', views.checkFilters, name='checkFilters'),
     path('updateServerFilters.php', views.updateServerFilters, name='updateServerFilters'),

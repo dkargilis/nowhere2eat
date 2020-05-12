@@ -304,7 +304,8 @@ def checkFilters(request):
 def home(request):
     return render(request, 'blog/homepage.html', context3)
 
-
+def contact(request):
+    return render(request, 'blog/contact.html', {'title': 'About'})
 
 
 def about(request):

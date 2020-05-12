@@ -149,9 +149,10 @@ function loadJS(){
     titleInDatabase = document.URL.slice(document.URL.indexOf("t=")+2);
     numberOfRestaurants = Object.keys(restaurantInfoMaster).length
 
-
+    document.getElementById("URLCopy").value = document.URL;
 
     document.getElementById("usernameSubmitButton").addEventListener("click", usernameSubmitted)
+    document.getElementById("copySubmitButton").addEventListener("click", copySubmitButton)
 
     for(i=0; i<filterScores.length; i++){
         //add button listeners here
@@ -635,10 +636,10 @@ function updateOrder(){
                     usersUpSplit = (restaurantInfoMaster[i].usernamesVotedUp).split(',')
 
                     for(z=0;z<usersDownSplit.length;z++){
-                        usersDownTool = usersDownTool+usersDownSplit[z]
+                        usersDownTool = usersDownTool+' '+usersDownSplit[z]
                     }
                     for(z=0;z<usersUpSplit.length;z++){
-                        usersUpTool = usersUpTool+usersUpSplit[z]
+                        usersUpTool = usersUpTool+' '+usersUpSplit[z]
                     }
 
                     document.getElementsByClassName("restElements")[i].setAttribute('tooltip', "\xa0 Upvotes: "+usersUpTool +"\xa0"+ "\n"+"\xa0 Downvotes: "+usersDownTool+ "\xa0")
@@ -709,12 +710,33 @@ function updateOrder(){
         if(serverFilterUsernamesUp[x] != "" || serverFilterUsernamesDown[x] != ""){
                     //need to make this into a string or figure out how i want to format the users that have voted
 
+                    //document.getElementsByClassName("restElements")[i].setAttribute('tooltip', "\xa0 Upvotes: "+usersUpTool +"\xa0"+ "\n"+"\xa0 Downvotes: "+usersDownTool+ "\xa0")
+
+                    //document.getElementsByClassName("restElements")[i].setAttribute('tooltip',"\xa0No votes yet\xa0")
+
+                    var usersUpSplit
+                    var usersDownSplit
+
+                    var usersUpTool = ""
+                    var usersDownTool = ""
+
+                    usersDownSplit = serverFilterUsernamesDown[x].split(',')
+                    usersUpSplit = serverFilterUsernamesUp[x].split(',')
+
+                    for(z=0;z<usersDownSplit.length;z++){
+                        usersDownTool = usersDownTool+' '+usersDownSplit[z]
+                    }
+                    for(z=0;z<usersUpSplit.length;z++){
+                        usersUpTool = usersUpTool+' '+usersUpSplit[z]
+                    }
 
 
-                    document.getElementsByClassName("filterElements")[x].setAttribute('tooltip', "\xa0 Upvotes: "+serverFilterUsernamesUp[x] +"\xa0"+ "\n"+"\xa0 Downvotes: "+serverFilterUsernamesDown[x]+ "\xa0")
+
+
+                    document.getElementsByClassName("filterElements")[x].setAttribute('tooltip', "\xa0 Upvotes: "+ usersUpTool +"\xa0"+ "\n"+"\xa0 Downvotes: "+ usersDownTool + "\xa0")
 
                 }else{
-                    document.getElementsByClassName("filterElements")[x].setAttribute('tooltip',"No votes yet")
+                    document.getElementsByClassName("filterElements")[x].setAttribute('tooltip',"\xa0No votes yet\xa0")
                 }
     }
 }
@@ -926,6 +948,17 @@ function usernameSubmitted(){
     }
 }
 
+
+function copySubmitButton(){
+    var urlField = document.getElementById("URLCopy")
+
+    urlField.select();
+    urlField.setSelectionRange(0,99999);
+    document.execCommand("copy");
+
+    document.getElementById("copySubmitButton").innerText = "Copied!"
+
+}
 
 function fadeInUpRestaurant(restToFade){
 
