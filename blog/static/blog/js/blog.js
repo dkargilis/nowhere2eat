@@ -905,11 +905,11 @@ function updateClientFilters(){
 function generateNewGroup(region){
     //make ajax request that returns the title and url, set our title to titleindatabase
     //redirect to the generated url
-    console.log("Pre AJAX request")
+
     $.post('/newGroup.php', {}, function(json_response){
             urlCode = json_response.urlString.url
             titleInDatabase=urlCode
-            Csrf-Token: '{{ csrf_token }}'
+            csrf_token: csrftoken
             console.log("we made it to this point")
             window.location.href = document.URL + "group/"+region+"/?t="+urlCode;
     });
