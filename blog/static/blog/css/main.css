@@ -149,7 +149,7 @@ a.article-title:hover {
 }
 .downvoteButton{
   position:absolute;
-  bottom:15px;
+  top:65px;
   right:0.5em;
   padding-top:0px;
   padding-right:5px;
@@ -171,7 +171,7 @@ a.article-title:hover {
 }
 .upvoteButton{
   position:absolute;
-  bottom:15px;
+  top:65px;
   right:3em;
   padding-top:0px;
   padding-right:5px;
@@ -391,8 +391,9 @@ h9{
 }
 
 .score{
-  padding-top:50px;
-
+  padding-top:0px;
+  padding-right:10px;
+  padding-left:10px;
 }
 
 
