@@ -29,12 +29,13 @@ var urlCode = 'testfilterset';
 
 var orderedRestaurants;
 
-var restaurantHeader = document.getElementsByClassName("article-title");
-var restaurantContainer = document.getElementsByClassName("restElements")
-var restaurantScore = document.getElementsByClassName("score")
-var restaurantID = document.getElementsByClassName("restElements")
-var filterScores = document.getElementsByClassName("scoreFilter")
-var restaurantBoxes = document.getElementsByClassName("media content-section")
+var restaurantHeader
+var restaurantContainer
+var restaurantScore
+var restaurantID
+var filterScores
+var restaurantBoxes
+var restaurantTags
 
 var filterUpvoteButtons;
 var filterDownvoteButtons;
@@ -114,6 +115,13 @@ $(window).on('load', function() {
                         serverFilterUsernamesDown = JSON.parse(json['serverFilterUsernamesDown'])
                         serverFilterUsernamesUp = JSON.parse(json['serverFilterUsernamesUp'])
 
+                        restaurantHeader = document.getElementsByClassName("article-title");
+                        restaurantContainer = document.getElementsByClassName("restElements")
+                        restaurantScore = document.getElementsByClassName("score")
+                        restaurantID = document.getElementsByClassName("restElements")
+                        filterScores = document.getElementsByClassName("scoreFilter")
+                        restaurantBoxes = document.getElementsByClassName("media content-section")
+                        restaurantTags = document.getElementsByClassName("rTags")
 
                         initializeFilters()
                         loadJS()
@@ -124,7 +132,7 @@ $(window).on('load', function() {
 
 
                     }
-                    console.log(restaurantInfoMaster)
+                    //console.log(restaurantInfoMaster)
 
                 },
                 error : function () {
@@ -144,6 +152,10 @@ $(window).on('load', function() {
 
 
 function loadJS(){
+
+
+
+
 
     filters = document.getElementById("FilterOptions").getElementsByTagName("li");
     restaurantOptions = document.getElementById("RestaurantOptions").getElementsByTagName("article");
@@ -535,8 +547,8 @@ function activateButton(){
 function checkForUpdate(){
     //every second we want it to check for the file and see if it's changed?
 
-    console.log("checking for update")
-    console.log(titleInDatabase)
+    //console.log("checking for update")
+    //console.log(titleInDatabase)
 
     $.ajax({
             url : "/alphaSort.php",
@@ -553,7 +565,7 @@ function checkForUpdate(){
                serverFilterUsernamesUp = JSON.parse(json['serverFilterUsernamesUp'])
 
                updateOrder()
-               console.log("success")
+               //console.log("success")
             },
             error : function () {
                 console.log("Error Ajax checking update");
@@ -624,6 +636,24 @@ function updateOrder(){
                 restaurantScore[i].innerText = restaurantInfoMaster[i].score
                 restaurantID[i+1] = restaurantInfoMaster[i].id
 
+                var tags = ""
+                if(restaurantInfoMaster[i].price == "price1"){
+                    tags = ",$,"
+                }else if(restaurantInfoMaster[i].price == "price2"){
+                    tags = ",$$,"
+                }else if(restaurantInfoMaster[i].price == "price3"){
+                    tags = ",$$$,"
+                }else if(restaurantInfoMaster[i].price == "price4"){
+                    tags = ",$$$$,"
+                }
+
+                tags = tags + restaurantInfoMaster[i].genre + restaurantInfoMaster[i].vegetarianOptions + restaurantInfoMaster[i].seating
+
+                //tags = tags.replace(/ /g," · ")
+                tags = tags.replace(/,,/g,",")
+                tags = tags.replace(/,/g," · ")
+
+                restaurantTags[i].innerText = tags
 
 
 
@@ -761,7 +791,7 @@ function filterToggledUpdateRestaurants(filterVotedID, deltaValue){
     for(y=0;y<Object.keys(filters).length;y++){
         if(filters[y].id == filterVotedID){
             tempFilterIndex = y
-            console.log(tempFilterIndex)
+            //console.log(tempFilterIndex)
         }
     }
 
@@ -840,7 +870,7 @@ function filterToggledUpdateRestaurants(filterVotedID, deltaValue){
 }
 
 function delayedRemoveRestaurant(vari, varx, num){
-    console.log(num)
+    //console.log(num)
     setTimeout(function(){ removeRestaurant(document.getElementsByClassName("animated")[vari+1]) }, 75*num);
 
 
