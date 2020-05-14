@@ -10,7 +10,7 @@
     <div class="container">
 
       <div class="animated usernameEntry" id="linkShare" hidden>
-          <h6>Share this link with others:</h6> <br><input type="text" name="URLCopy" id="URLCopy" value="">
+          <h6>Vote on individual restaurants to change their priority, or vote on filters to affect all restaurants of that type. Hover over restaurants or filters to see current votes.<br><br>Share this link with others:</h6> <br><input type="text" name="URLCopy" id="URLCopy" value="">
           <button1 id=copySubmitButton> Copy </button1>
       </div>
 
@@ -37,6 +37,7 @@
 
                         <h2><a class="article-title dynamicLink" href=# target="_blank">{{ post.title }}</a>
                         </h2>
+                        <br><h6>{{ post.genre }} {{ post.seating }} {{ post.vegetarianOptions }}</h6>
                       </div>
 
 
