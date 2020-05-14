@@ -93,42 +93,55 @@ if(document.URL.includes("group")){
         //54
         titleInDatabase = document.URL.slice(document.URL.indexOf("t=")+2);
 }
-$.ajax({
-            url : document.URL,
-            type : "GET",
-            data : {title: titleInDatabase},
-            success : function (json) {
-               runJS = false;
-                //filtersServer = json_response.user
+$(window).on('load', function() {
+    // your code here
+    $.ajax({
+                url : document.URL,
+                type : "GET",
+                data : {title: titleInDatabase},
+                success : function (json) {
+                   runJS = false;
+                    //filtersServer = json_response.user
 
-                if(document.URL.includes("group")){
+                    if(document.URL.includes("group")){
 
-                    runJS = true;
-                    restaurantInfoMaster=JSON.parse(json['restaurantInfo']);
-
-
-                    serverFilterScores = JSON.parse(json['filterInfo'])
-
-                    serverFilterUsernamesDown = JSON.parse(json['serverFilterUsernamesDown'])
-                    serverFilterUsernamesUp = JSON.parse(json['serverFilterUsernamesUp'])
+                        runJS = true;
+                        restaurantInfoMaster=JSON.parse(json['restaurantInfo']);
 
 
-                    initializeFilters()
-                    loadJS()
+                        serverFilterScores = JSON.parse(json['filterInfo'])
+
+                        serverFilterUsernamesDown = JSON.parse(json['serverFilterUsernamesDown'])
+                        serverFilterUsernamesUp = JSON.parse(json['serverFilterUsernamesUp'])
+
+
+                        initializeFilters()
+                        loadJS()
 
 
 
-                    updateOrder()
+                        updateOrder()
 
 
+                    }
+                    console.log(restaurantInfoMaster)
+
+                },
+                error : function () {
+                    console.log("Error Ajax");
                 }
-                console.log(restaurantInfoMaster)
+            })
 
-            },
-            error : function () {
-                console.log("Error Ajax");
-            }
-        })
+
+
+
+
+
+
+
+
+});
+
 
 function loadJS(){
 
