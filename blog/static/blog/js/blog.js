@@ -35,6 +35,7 @@ var restaurantScore
 var restaurantID
 var filterScores
 var restaurantBoxes
+var filterBoxes
 var restaurantTags
 
 var filterUpvoteButtons;
@@ -139,6 +140,7 @@ $(window).on('load', function() {
                         restaurantID = document.getElementsByClassName("restElements")
                         filterScores = document.getElementsByClassName("scoreFilter")
                         restaurantBoxes = document.getElementsByClassName("media content-section")
+                        filterBoxes = document.getElementsByClassName("list-group-item")
                         restaurantTags = document.getElementsByClassName("rTags")
 
                         initializeFilters()
@@ -794,11 +796,51 @@ function updateOrder(){
 
 
 
-                    document.getElementsByClassName("filterElements")[x].setAttribute('tooltip', "\xa0 Upvotes: "+ usersUpTool +"\xa0"+ "\n"+"\xa0 Downvotes: "+ usersDownTool + "\xa0")
+                    filterBoxes[x].setAttribute('tooltip', "\xa0 Upvotes: "+ usersUpTool +"\xa0"+ "\n"+"\xa0 Downvotes: "+ usersDownTool + "\xa0")
 
                 }else{
-                    document.getElementsByClassName("filterElements")[x].setAttribute('tooltip',"\xa0No votes yet\xa0")
+                    filterBoxes[x].setAttribute('tooltip',"\xa0No votes yet\xa0")
                 }
+
+                if(parseInt(filterScores[x].innerText) == 0){
+                    filterBoxes[x].style.background = "#FFFFFF"
+                }else if(parseInt(filterScores[x].innerText) > 0){
+
+                    if(parseInt(filterScores[x].innerText) == 1){
+                        filterBoxes[x].style.background = "#E3F7DD"
+                    }else if(parseInt(filterScores[x].innerText) == 2){
+                        filterBoxes[x].style.background = "#C7EFBC"
+                    }else if(parseInt(filterScores[x].innerText) == 3){
+                        filterBoxes[x].style.background = "#ABE89A"
+                    }else if(parseInt(filterScores[x].innerText) == 4){
+                        filterBoxes[x].style.background = "#8FE079"
+                    }else if(parseInt(filterScores[x].innerText) == 5){
+                        filterBoxes[x].style.background = "#74D958"
+                    }else{
+                        filterBoxes[x].style.background = "#5CAD46"
+                    }
+
+                }else if(parseInt(filterScores[x].innerText)<0){
+                    if(parseInt(filterScores[x].innerText) == -1){
+                        filterBoxes[x].style.background = "#FED2D2"
+                    }else if(parseInt(filterScores[x].innerText) == -2){
+                        filterBoxes[x].style.background = "#FDA6A6"
+                    }else if(parseInt(filterScores[x].innerText) == -3){
+                        filterBoxes[x].style.background = "#FD7A7A"
+                    }else if(parseInt(filterScores[x].innerText) == -4){
+                        filterBoxes[x].style.background = "#FC4E4E"
+                    }else if(parseInt(filterScores[x].innerText) == -5){
+                        filterBoxes[x].style.background = "#FC2222"
+                    }else{
+                        filterBoxes[x].style.background = "#C91B1B"
+                    }
+                }
+
+
+
+
+
+
     }
 }
 

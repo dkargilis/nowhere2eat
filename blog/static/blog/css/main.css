@@ -54,6 +54,16 @@ ul {
   margin-bottom: 20px;
 }
 
+.filtercontsect{
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  width:auto;
+  align-content:left;
+}
+
 .article-title {
   color: #444444;
 }
@@ -78,6 +88,7 @@ a.article-title:hover {
   margin-bottom: 4px;
   border-bottom: 1px solid #e3e3e3
 }
+
 
 .article-metadata a:hover {
   color: #333;
@@ -408,12 +419,14 @@ h9{
   padding-left:10px;
 }
 
-
+.restElements{
+  position:relative;
+}
 
 [tooltip]:before {
     /* needed - do not touch */
     content: attr(tooltip);
-    position: relative;
+    position: absolute;
     opacity: 0;
     left:0%;
     top:10%;
@@ -461,10 +474,11 @@ h9{
 
 .filterElements{
   display: table;
-  width: 181px;
+  width: auto;
   height: 62px;
   padding-top:0px;
-  margin-top:-25px;
+  margin-top:0px;
+
 
 
 }
