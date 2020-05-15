@@ -45,6 +45,8 @@ var links = document.getElementsByClassName('dynamicLink');
 var href = "http://www.google.com"; //any other link as wish
 
 
+
+
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie != '') {
@@ -96,6 +98,14 @@ if(document.URL.includes("group")){
 }
 $(window).on('load', function() {
     // your code here
+
+    var tempobj = document.getElementsByClassName("temp")
+
+    tempobj[0].innerText=window.location.href
+    tempobj[0].align = "center"
+    //alert(window.location.href)
+
+
     $.ajax({
                 url : document.URL,
                 type : "GET",
