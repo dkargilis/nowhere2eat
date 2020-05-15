@@ -99,9 +99,10 @@ if(document.URL.includes("group")){
 $(window).on('load', function() {
     // your code here
 
-    if(window.location.href=="https://shrouded-mesa-49267.herokuapp.com/"){
-        window.location.replace("http://www.nowhere2eat.com");
-    }
+    //fixes it on safari
+    //if(window.location.href=="https://shrouded-mesa-49267.herokuapp.com/"){
+    //    window.location.replace("http://www.nowhere2eat.com");
+    //}
 
 
 
