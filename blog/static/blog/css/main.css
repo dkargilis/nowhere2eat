@@ -28,6 +28,7 @@ body {
 
 ul {
   margin: 0;
+  padding-inline-start:0px;
 }
 
 .bg-steel {
@@ -421,6 +422,13 @@ h9{
 
 .restElements{
   position:relative;
+  width:auto;
+
+}
+
+.restaurants{
+
+
 }
 
 [tooltip]:before {
