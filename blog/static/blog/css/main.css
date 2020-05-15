@@ -286,6 +286,17 @@ h6 {
   display: inline-block;
   margin-right:10px;
   margin-left:10px;
+
+}
+
+h7{
+  color: #444444;
+
+  font-size: 1em;
+  display: inline-block;
+  margin-right:10px;
+  margin-left:10px;
+  align-text:left;
 }
 
 
