@@ -101,8 +101,11 @@ $(window).on('load', function() {
 
     var tempobj = document.getElementsByClassName("temp")
 
-    tempobj[0].innerText=window.location.href
-    tempobj[0].align = "center"
+    //on safari it opens to https://shrouded-mesa-49267.herokuapp.com/ and we want to forward to the correct address if this is what's opened
+
+
+    //tempobj[0].innerText=window.location.href
+    //tempobj[0].align = "center"
     //alert(window.location.href)
 
 
