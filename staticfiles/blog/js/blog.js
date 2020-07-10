@@ -596,7 +596,7 @@ function updateOrder(){
 
                     document.getElementsByClassName("restElements")[i].setAttribute('tooltip', "\xa0 Upvotes: "+usersUpTool +"\xa0"+ "\n"+"\xa0 Downvotes: "+usersDownTool+ "\xa0")
                 }else{
-                    document.getElementsByClassName("restElements")[i].setAttribute('tooltip',"\xa0No votes yet\xa0")
+                    document.getElementsByClassName("restElements")[i].setAttribute('tooltip',"\xa0No individual restaurant votes yet\xa0")
                 }
 
                 //now we need to change the color to match the score
@@ -667,7 +667,7 @@ function updateOrder(){
                     document.getElementsByClassName("filterElements")[x].setAttribute('tooltip', "\xa0 Upvotes: "+serverFilterUsernamesUp[x] +"\xa0"+ "\n"+"\xa0 Downvotes: "+serverFilterUsernamesDown[x]+ "\xa0")
 
                 }else{
-                    document.getElementsByClassName("filterElements")[x].setAttribute('tooltip',"No votes yet")
+                    document.getElementsByClassName("filterElements")[x].setAttribute('tooltip',"No filter votes yet")
                 }
     }
 }
