@@ -557,13 +557,17 @@ function addSingleRestaurant(restaurantToAdd){
 function activateButton(){
     //reroute to /phl/ then create group
 
-    if((this.innerText == "University City")|| (this.textContent == "University City")){
+    //this is a lazy fix
+    generateNewGroup("UC")
 
-        generateNewGroup("UC")
-    }
-    if(this.innerText == "East Lansing"){
-        generateNewGroup("EL")
-    }
+
+    //if((this.innerText == "University City")|| (this.textContent == "University City")){
+
+    //    generateNewGroup("UC")
+    //}
+    //if(this.innerText == "East Lansing"){
+    //    generateNewGroup("EL")
+    //}
 }
 
 
