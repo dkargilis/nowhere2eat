@@ -1009,7 +1009,7 @@ function updateClientFilters(){
 function generateNewGroup(region){
     //make ajax request that returns the title and url, set our title to titleindatabase
     //redirect to the generated url
-
+    alert("generating group")
     $.post('/newGroup.php', {}, function(json_response){
             urlCode = json_response.urlString.url
             titleInDatabase=urlCode
