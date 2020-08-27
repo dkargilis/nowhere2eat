@@ -29,12 +29,14 @@ var urlCode = 'testfilterset';
 
 var orderedRestaurants;
 
-var restaurantHeader = document.getElementsByClassName("article-title");
-var restaurantContainer = document.getElementsByClassName("restElements")
-var restaurantScore = document.getElementsByClassName("score")
-var restaurantID = document.getElementsByClassName("restElements")
-var filterScores = document.getElementsByClassName("scoreFilter")
-var restaurantBoxes = document.getElementsByClassName("media content-section")
+var restaurantHeader
+var restaurantContainer
+var restaurantScore
+var restaurantID
+var filterScores
+var restaurantBoxes
+var filterBoxes
+var restaurantTags
 
 var filterUpvoteButtons;
 var filterDownvoteButtons;
@@ -44,48 +46,136 @@ var links = document.getElementsByClassName('dynamicLink');
 var href = "http://www.google.com"; //any other link as wish
 
 
+
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+     beforeSend: function(xhr, settings) {
+         function getCookie(name) {
+             var cookieValue = null;
+             if (document.cookie && document.cookie != '') {
+                 var cookies = document.cookie.split(';');
+                 for (var i = 0; i < cookies.length; i++) {
+                     var cookie = jQuery.trim(cookies[i]);
+                     // Does this cookie string begin with the name we want?
+                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                         break;
+                     }
+                 }
+             }
+             return cookieValue;
+         }
+         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+             // Only send the token to relative URLs i.e. locally.
+             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+         }
+     }
+});
+
 //ajax request to figure out what page is and get restaurant data
 if(document.URL.includes("group")){
-        titleInDatabase = document.URL.slice(34);
+        //54
+        titleInDatabase = document.URL.slice(document.URL.indexOf("t=")+2);
 }
-$.ajax({
-            url : document.URL,
-            type : "GET",
-            data : {title: titleInDatabase},
-            success : function (json) {
-               runJS = false;
-                //filtersServer = json_response.user
+$(window).on('load', function() {
+    // your code here
 
-                if(document.URL.includes("group")){
-
-                    runJS = true;
-                    restaurantInfoMaster=JSON.parse(json['restaurantInfo']);
-
-
-                    serverFilterScores = JSON.parse(json['filterInfo'])
-
-                    serverFilterUsernamesDown = JSON.parse(json['serverFilterUsernamesDown'])
-                    serverFilterUsernamesUp = JSON.parse(json['serverFilterUsernamesUp'])
-
-
-                    initializeFilters()
-                    loadJS()
+    //fixes it on safari
+    //if(window.location.href=="https://shrouded-mesa-49267.herokuapp.com/"){
+    //    window.location.replace("http://www.nowhere2eat.com");
+    //}
 
 
 
-                    updateOrder()
+    //on safari it opens to https://shrouded-mesa-49267.herokuapp.com/ and we want to forward to the correct address if this is what's opened
 
 
+    //tempobj[0].innerText=window.location.href
+    //tempobj[0].align = "center"
+    //alert(window.location.href)
+
+
+    $.ajax({
+                url : document.URL,
+                type : "GET",
+                data : {title: titleInDatabase},
+                success : function (json) {
+                   runJS = false;
+                    //filtersServer = json_response.user
+
+                    if(document.URL.includes("group")){
+
+                        runJS = true;
+                        restaurantInfoMaster=JSON.parse(json['restaurantInfo']);
+
+
+                        serverFilterScores = JSON.parse(json['filterInfo'])
+
+                        serverFilterUsernamesDown = JSON.parse(json['serverFilterUsernamesDown'])
+                        serverFilterUsernamesUp = JSON.parse(json['serverFilterUsernamesUp'])
+
+                        restaurantHeader = document.getElementsByClassName("article-title");
+                        restaurantContainer = document.getElementsByClassName("restElements")
+                        restaurantScore = document.getElementsByClassName("score")
+                        restaurantID = document.getElementsByClassName("restElements")
+                        filterScores = document.getElementsByClassName("scoreFilter")
+                        restaurantBoxes = document.getElementsByClassName("media content-section")
+                        filterBoxes = document.getElementsByClassName("list-group-item")
+                        restaurantTags = document.getElementsByClassName("rTags")
+
+                        initializeFilters()
+                        loadJS()
+
+
+
+                        updateOrder()
+
+
+                    }
+                    //console.log(restaurantInfoMaster)
+
+                },
+                error : function () {
+                    console.log("Error Ajax");
                 }
-                console.log(restaurantInfoMaster)
+            })
 
-            },
-            error : function () {
-                console.log("Error Ajax");
-            }
-        })
+
+
+
+
+
+
+
+
+});
+
 
 function loadJS(){
+
+
+
+
 
     filters = document.getElementById("FilterOptions").getElementsByTagName("li");
     restaurantOptions = document.getElementById("RestaurantOptions").getElementsByTagName("article");
@@ -101,12 +191,13 @@ function loadJS(){
 
     usernameContainer[0]
 
-    titleInDatabase = document.URL.slice(34);
+    titleInDatabase = document.URL.slice(document.URL.indexOf("t=")+2);
     numberOfRestaurants = Object.keys(restaurantInfoMaster).length
 
-
+    document.getElementById("URLCopy").value = document.URL;
 
     document.getElementById("usernameSubmitButton").addEventListener("click", usernameSubmitted)
+    document.getElementById("copySubmitButton").addEventListener("click", copySubmitButton)
 
     for(i=0; i<filterScores.length; i++){
         //add button listeners here
@@ -140,6 +231,8 @@ function loadJS(){
 }
 if(document.getElementById("page").getAttribute("data-title")=="homepage"){
     //we are on the homepage
+    console.log("homepage")
+    alert("homepage")
     var animation = document.getElementsByClassName("animated");
     var buttons = document.getElementById("buttonCase").getElementsByTagName("button");
     for(i=0; i<buttons.length; i++){
@@ -291,7 +384,7 @@ function clickFilterUpvoteButton(){
                     }else{
                         //they havent voted up already
                         //they havent voted down already
-                        //and they have a username so now they can finally vote down!
+                        //and they have a username so now they can finally vote up!
                         console.log("upvoting restauraint")
                         upvoteSingleFilterWithParameter(filters[e].id)
                         updateServer()
@@ -464,8 +557,8 @@ function addSingleRestaurant(restaurantToAdd){
 
 function activateButton(){
     //reroute to /phl/ then create group
-    if(this.innerText == "Philadelphia"){
-        generateNewGroup("PH")
+    if(this.innerText == "University City"){
+        generateNewGroup("UC")
     }
     if(this.innerText == "East Lansing"){
         generateNewGroup("EL")
@@ -476,11 +569,12 @@ function activateButton(){
 function checkForUpdate(){
     //every second we want it to check for the file and see if it's changed?
 
-
+    //console.log("checking for update")
+    //console.log(titleInDatabase)
 
     $.ajax({
             url : "/alphaSort.php",
-            type : "GET",
+            type : "POST",
             data : {'title' : JSON.stringify(titleInDatabase)} ,
             success : function (json) {
 
@@ -493,6 +587,7 @@ function checkForUpdate(){
                serverFilterUsernamesUp = JSON.parse(json['serverFilterUsernamesUp'])
 
                updateOrder()
+               //console.log("success")
             },
             error : function () {
                 console.log("Error Ajax checking update");
@@ -506,7 +601,7 @@ function updateServer(){
 
      $.ajax({
             url : "/alphaUpdateServer.php",
-            type : "GET",
+            type : "POST",
             data : { 'values' : JSON.stringify(restaurantInfoMaster), 'title' : JSON.stringify(titleInDatabase), 'clientFilters': JSON.stringify(serverFilterScores), 'clientFilterUsernamesUp': JSON.stringify(serverFilterUsernamesUp), 'clientFilterUsernamesDown':JSON.stringify(serverFilterUsernamesDown)} ,
             success : function (json) {
                console.log(json)
@@ -563,6 +658,24 @@ function updateOrder(){
                 restaurantScore[i].innerText = restaurantInfoMaster[i].score
                 restaurantID[i+1] = restaurantInfoMaster[i].id
 
+                var tags = ""
+                if(restaurantInfoMaster[i].price == "price1"){
+                    tags = ",$,"
+                }else if(restaurantInfoMaster[i].price == "price2"){
+                    tags = ",$$,"
+                }else if(restaurantInfoMaster[i].price == "price3"){
+                    tags = ",$$$,"
+                }else if(restaurantInfoMaster[i].price == "price4"){
+                    tags = ",$$$$,"
+                }
+
+                tags = tags + restaurantInfoMaster[i].genre + restaurantInfoMaster[i].vegetarianOptions + restaurantInfoMaster[i].seating
+
+                //tags = tags.replace(/ /g," · ")
+                tags = tags.replace(/,,/g,",")
+                tags = tags.replace(/,/g," · ")
+
+                restaurantTags[i].innerText = tags
 
 
 
@@ -588,15 +701,15 @@ function updateOrder(){
                     usersUpSplit = (restaurantInfoMaster[i].usernamesVotedUp).split(',')
 
                     for(z=0;z<usersDownSplit.length;z++){
-                        usersDownTool = usersDownTool+usersDownSplit[z]
+                        usersDownTool = usersDownTool+' '+usersDownSplit[z]
                     }
                     for(z=0;z<usersUpSplit.length;z++){
-                        usersUpTool = usersUpTool+usersUpSplit[z]
+                        usersUpTool = usersUpTool+' '+usersUpSplit[z]
                     }
 
                     document.getElementsByClassName("restElements")[i].setAttribute('tooltip', "\xa0 Upvotes: "+usersUpTool +"\xa0"+ "\n"+"\xa0 Downvotes: "+usersDownTool+ "\xa0")
                 }else{
-                    document.getElementsByClassName("restElements")[i].setAttribute('tooltip',"\xa0No individual restaurant votes yet\xa0")
+                    document.getElementsByClassName("restElements")[i].setAttribute('tooltip',"\xa0No votes yet\xa0")
                 }
 
                 //now we need to change the color to match the score
@@ -662,13 +775,74 @@ function updateOrder(){
         if(serverFilterUsernamesUp[x] != "" || serverFilterUsernamesDown[x] != ""){
                     //need to make this into a string or figure out how i want to format the users that have voted
 
+                    //document.getElementsByClassName("restElements")[i].setAttribute('tooltip', "\xa0 Upvotes: "+usersUpTool +"\xa0"+ "\n"+"\xa0 Downvotes: "+usersDownTool+ "\xa0")
+
+                    //document.getElementsByClassName("restElements")[i].setAttribute('tooltip',"\xa0No votes yet\xa0")
+
+                    var usersUpSplit
+                    var usersDownSplit
+
+                    var usersUpTool = ""
+                    var usersDownTool = ""
+
+                    usersDownSplit = serverFilterUsernamesDown[x].split(',')
+                    usersUpSplit = serverFilterUsernamesUp[x].split(',')
+
+                    for(z=0;z<usersDownSplit.length;z++){
+                        usersDownTool = usersDownTool+' '+usersDownSplit[z]
+                    }
+                    for(z=0;z<usersUpSplit.length;z++){
+                        usersUpTool = usersUpTool+' '+usersUpSplit[z]
+                    }
 
 
-                    document.getElementsByClassName("filterElements")[x].setAttribute('tooltip', "\xa0 Upvotes: "+serverFilterUsernamesUp[x] +"\xa0"+ "\n"+"\xa0 Downvotes: "+serverFilterUsernamesDown[x]+ "\xa0")
+
+
+                    filterBoxes[x].setAttribute('tooltip', "\xa0 Upvotes: "+ usersUpTool +"\xa0"+ "\n"+"\xa0 Downvotes: "+ usersDownTool + "\xa0")
 
                 }else{
-                    document.getElementsByClassName("filterElements")[x].setAttribute('tooltip',"No filter votes yet")
+                    filterBoxes[x].setAttribute('tooltip',"\xa0No votes yet\xa0")
                 }
+
+                if(parseInt(filterScores[x].innerText) == 0){
+                    filterBoxes[x].style.background = "#FFFFFF"
+                }else if(parseInt(filterScores[x].innerText) > 0){
+
+                    if(parseInt(filterScores[x].innerText) == 1){
+                        filterBoxes[x].style.background = "#E3F7DD"
+                    }else if(parseInt(filterScores[x].innerText) == 2){
+                        filterBoxes[x].style.background = "#C7EFBC"
+                    }else if(parseInt(filterScores[x].innerText) == 3){
+                        filterBoxes[x].style.background = "#ABE89A"
+                    }else if(parseInt(filterScores[x].innerText) == 4){
+                        filterBoxes[x].style.background = "#8FE079"
+                    }else if(parseInt(filterScores[x].innerText) == 5){
+                        filterBoxes[x].style.background = "#74D958"
+                    }else{
+                        filterBoxes[x].style.background = "#5CAD46"
+                    }
+
+                }else if(parseInt(filterScores[x].innerText)<0){
+                    if(parseInt(filterScores[x].innerText) == -1){
+                        filterBoxes[x].style.background = "#FED2D2"
+                    }else if(parseInt(filterScores[x].innerText) == -2){
+                        filterBoxes[x].style.background = "#FDA6A6"
+                    }else if(parseInt(filterScores[x].innerText) == -3){
+                        filterBoxes[x].style.background = "#FD7A7A"
+                    }else if(parseInt(filterScores[x].innerText) == -4){
+                        filterBoxes[x].style.background = "#FC4E4E"
+                    }else if(parseInt(filterScores[x].innerText) == -5){
+                        filterBoxes[x].style.background = "#FC2222"
+                    }else{
+                        filterBoxes[x].style.background = "#C91B1B"
+                    }
+                }
+
+
+
+
+
+
     }
 }
 
@@ -679,7 +853,7 @@ function filterToggledUpdateRestaurants(filterVotedID, deltaValue){
     for(y=0;y<Object.keys(filters).length;y++){
         if(filters[y].id == filterVotedID){
             tempFilterIndex = y
-            console.log(tempFilterIndex)
+            //console.log(tempFilterIndex)
         }
     }
 
@@ -758,7 +932,7 @@ function filterToggledUpdateRestaurants(filterVotedID, deltaValue){
 }
 
 function delayedRemoveRestaurant(vari, varx, num){
-    console.log(num)
+    //console.log(num)
     setTimeout(function(){ removeRestaurant(document.getElementsByClassName("animated")[vari+1]) }, 75*num);
 
 
@@ -837,10 +1011,12 @@ function generateNewGroup(region){
     //make ajax request that returns the title and url, set our title to titleindatabase
     //redirect to the generated url
 
-    $.get('/newGroup.php', {}, function(json_response){
+    $.post('/newGroup.php', {}, function(json_response){
             urlCode = json_response.urlString.url
             titleInDatabase=urlCode
-            window.location.href = "http://localhost:8000/group/"+region+"/?t="+urlCode;
+            csrfmiddlewaretoken: csrftoken
+
+            window.location.href = document.URL + "group/"+region+"/?t="+urlCode;
     });
 
 
@@ -878,6 +1054,17 @@ function usernameSubmitted(){
     }
 }
 
+
+function copySubmitButton(){
+    var urlField = document.getElementById("URLCopy")
+
+    urlField.select();
+    urlField.setSelectionRange(0,99999);
+    document.execCommand("copy");
+
+    document.getElementById("copySubmitButton").innerText = "Copied!"
+
+}
 
 function fadeInUpRestaurant(restToFade){
 

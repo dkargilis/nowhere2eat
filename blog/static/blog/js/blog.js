@@ -231,6 +231,7 @@ function loadJS(){
 }
 if(document.getElementById("page").getAttribute("data-title")=="homepage"){
     //we are on the homepage
+
     var animation = document.getElementsByClassName("animated");
     var buttons = document.getElementById("buttonCase").getElementsByTagName("button");
     for(i=0; i<buttons.length; i++){
